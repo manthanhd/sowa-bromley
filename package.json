@@ -1,0 +1,19 @@
+{
+  "name": "sowa-bromley",
+  "version": "0.0.0",
+  "description": "sowa-bromley\r ============",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manthanhd/sowa-bromley.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manthanhd/sowa-bromley/issues"
+  },
+  "homepage": "https://github.com/manthanhd/sowa-bromley"
+}
