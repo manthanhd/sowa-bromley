@@ -46,7 +46,8 @@ app.post('/insert', function(req, res) {
 	});
 
 });
-app.get('/search/:searchTerm', function(req, res) {
+app.get('/search/:colName/:searchTerm', function(req, res) {
+	var colName = req.params.colName;
 	var searchTerm = req.params.searchTerm;
 	//need to work on this.
 	var mongo = require("mongodb");
@@ -56,7 +57,7 @@ app.get('/search/:searchTerm', function(req, res) {
 	
 	mongo.Db.connect(mongoUri, function (err, db) {
 	  db.collection('twitch', function(er, collection) {
-	    collection.find({"species":searchTerm}).toArray(function (err, docs) {
+	    collection.find({colName:{$regex:searchTerm, $options:"i"}}).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
 		res.send(docs);
 	    });
