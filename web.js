@@ -56,9 +56,9 @@ app.get('/search/:searchTerm', function(req, res) {
 	
 	mongo.Db.connect(mongoUri, function (err, db) {
 	  db.collection('twitch', function(er, collection) {
-	    collection.find().toArray(function (err, docs) {
+	    collection.find({species:searchTerm}).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
-		res.send(docs);
+		console.log(docs);
 	    });
 	    
 	  });

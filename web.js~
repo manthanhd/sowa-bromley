@@ -58,7 +58,7 @@ app.get('/search/:searchTerm', function(req, res) {
 	  db.collection('twitch', function(er, collection) {
 	    collection.find().toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
-		console.log(docs);
+		res.send(docs);
 	    });
 	    
 	  });
