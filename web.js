@@ -11,13 +11,13 @@ app.get('/', function(req, res) {
 
 app.post('/insert', function(req, res) {
 	var description = req.description;
-	var species = req.body.species;
-	var age = req.body.age;
-	var sex = req.body.sex;
-	var postDate = req.body.postDate;
-	var lat = req.body.lat;
-	var lon = req.body.lon;
-	var username = req.body.username;
+	var species = req.species;
+	var age = req.age;
+	var sex = req.sex;
+	var postDate = req.postDate;
+	var lat = req.lat;
+	var lon = req.lon;
+	var username = req.username;
 
 	var newpost = {
 			"username":username,
