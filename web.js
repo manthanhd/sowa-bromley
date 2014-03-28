@@ -61,9 +61,11 @@ app.get('/search/:colName/:searchTerm', function(req, res) {
 	    queryField[colName] = {$regex:searchTerm, $options:"i"};
 	    collection.find(queryField).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
-		//var js2xmlparser = require("js2xmlparser");
-		//res.send(js2xmlparser("BWML", docs));
-		res.send(docs);
+		var js2xmlparser = require("js2xmlparser");
+		var xmlString = js2xmlparser("", JSON.parse(docs));
+		xmlString = "<BWML>" + xmlString + "</BWML>";
+		res.send(xmlString);
+		//res.send(docs);
 	    });
 	    
 	  });
