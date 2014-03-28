@@ -46,7 +46,9 @@ app.post('/insert', function(req, res) {
 	});
 
 });
-app.get('/search', function(req, res) {
+app.get('/search/:searchTerm', function(req, res) {
+	var searchTerm = req.params.searchTerm;
+	//need to work on this.
 	var mongo = require("mongodb");
 	var mongoUri = process.env.MONGOLAB_URI ||
 		  process.env.MONGOHQ_URL ||
@@ -55,7 +57,10 @@ app.get('/search', function(req, res) {
 	mongo.Db.connect(mongoUri, function (err, db) {
 	  db.collection('twitch', function(er, collection) {
 	    collection.find().toArray(function (err, docs) {
-		res.send("Found " + docs.length + " twitches.");
+		//res.send("Found " + docs.length + " twitches.");
+		docs.forEach(function(index, item){
+			console.log(item.description);
+		});
 	    });
 	    
 	  });
