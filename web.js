@@ -38,9 +38,13 @@ app.post('/insert', function(req, res) {
 
 	mongo.Db.connect(mongoUri, function (err, db) {
 	  db.collection('twitch', function(er, collection) {
-	  	collection.insert(newpost, {safe:true}, function(er, rs){});
+	  	collection.insert(newpost, {safe:true}, function(er, rs){
+			if(!er) res.send("Success");
+			else throw er;
+		});
 	  });
 	});
+
 });
 app.get('/search', function(req, res) {
 	var mongo = require("mongodb");
