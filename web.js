@@ -57,7 +57,9 @@ app.get('/search/:colName/:searchTerm', function(req, res) {
 	
 	mongo.Db.connect(mongoUri, function (err, db) {
 	  db.collection('twitch', function(er, collection) {
-	    collection.find({colName:{$regex:searchTerm, $options:"i"}}).toArray(function (err, docs) {
+	    var queryField = {};
+	    queryField[colName] = {$regex:searchTerm, $options:"i"};
+	    collection.find(queryField).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
 		res.send(docs);
 	    });
