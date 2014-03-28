@@ -9,7 +9,7 @@ app.get('/', function(req, res) {
 });
 
 
-app.get('/insert', function(req, res) {
+app.post('/insert', function(req, res) {
 	var description = req.body.description;
 	var species = req.body.species;
 	var age = req.body.age;
