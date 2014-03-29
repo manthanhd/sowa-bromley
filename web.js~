@@ -83,16 +83,17 @@ app.get('/search/:colName/:searchTerm/:pageNumber/:resultCount', function(req, r
 				xmlString += json2xml(xmlObj, {attributes_key:"attr"});
 			}
 			xmlString += "</BWML>";
+			db.close();
 			res.setHeader("content-type", "text/xml");
 			res.send(xmlString);
 		} else {
+			db.close();
 			res.setHeader("content-type", "text/xml");
 			res.send("<BWML></BWML>");
 		}
 	    });
 	    
 	  });
-	  db.close();
 	});
 });
 

@@ -85,6 +85,7 @@ app.get('/search/:colName/:searchTerm/:pageNumber/:resultCount', function(req, r
 			xmlString += "</BWML>";
 			db.close();
 			res.setHeader("content-type", "text/xml");
+			res.setHeader("Access-Control-Allow-Origin", "http://stu-nginx.cms.gre.ac.uk");
 			res.send(xmlString);
 		} else {
 			db.close();
