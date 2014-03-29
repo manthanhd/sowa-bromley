@@ -46,9 +46,11 @@ app.post('/insert', function(req, res) {
 	});
 
 });
-app.get('/search/:colName/:searchTerm', function(req, res) {
+app.get('/search/:colName/:searchTerm/:pageNumber/:resultCount', function(req, res) {
 	var colName = req.params.colName;
 	var searchTerm = req.params.searchTerm;
+	var pageNumber = parseInt(req.params.pageNumber);
+	var resultCount = parseInt(req.params.resultCount);
 	//need to work on this.
 	var mongo = require("mongodb");
 	var mongoUri = process.env.MONGOLAB_URI ||
@@ -59,7 +61,7 @@ app.get('/search/:colName/:searchTerm', function(req, res) {
 	  db.collection('twitch', function(er, collection) {
 	    var queryField = {};
 	    queryField[colName] = {$regex:searchTerm, $options:"i"};
-	    collection.find(queryField).toArray(function (err, docs) {
+	    collection.find(queryField).skip(pageNumber * resultCount).limit(resultCount).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
 		if(docs){
 			var xmlString = "<BWML>";
@@ -81,9 +83,11 @@ app.get('/search/:colName/:searchTerm', function(req, res) {
 				xmlString += json2xml(xmlObj, {attributes_key:"attr"});
 			}
 			xmlString += "</BWML>";
+			db.close();
 			res.setHeader("content-type", "text/xml");
 			res.send(xmlString);
 		} else {
+			db.close();
 			res.setHeader("content-type", "text/xml");
 			res.send("<BWML></BWML>");
 		}
