@@ -62,7 +62,8 @@ app.get('/search/:colName/:searchTerm', function(req, res) {
 	    collection.find(queryField).toArray(function (err, docs) {
 		//res.send("Found " + docs.length + " twitches.");
 		var json2xml = require("json2xml");
-		var xmlString = json2xml(docs);
+		var results = JSON.parse(JSON.stringify(docs));
+		var xmlString = json2xml(results);
 		xmlString = "<BWML>" + xmlString + "</BWML>";
 		res.send(xmlString);
 		//res.send(docs);
